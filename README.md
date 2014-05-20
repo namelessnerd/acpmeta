@@ -11,10 +11,12 @@ The file system is organized in the following manner. The top level folders are 
 To access the ontologies, check out the ontologies branch. 
 ***
 #### Uploading the Ontologies to Fuseki
-Once started, go the Fuseki url (port 3030 is default), select the workspace (/Users/namelessnerd/TBCMEWorkspace/intelligentInfrastructure/). Scroll down to the bottom to the upload area and upload the ontology files. There are some example SPARQL scripts in the file named sparql under Fuseki directory for testing.
+Once started, go the Fuseki url (port 3030 is default), go to the control panel, and select the workspace (/Users/namelessnerd/TBCMEWorkspace/intelligentInfrastructure/). Scroll down to the bottom to the upload area and upload the ontology files. There are some example SPARQL scripts in the file named sparql under Fuseki directory for testing.
 ***
 #### Django Structure
 Urls.py has the url to function mappings. The two view files (controllers in other MVC frameworks is known as view in Django) are views and ontologyAPIs. There are under backend/iim_poc/iim_poc. Please make sure to follow [PEP-8](http://legacy.python.org/dev/peps/pep-0008/) standards while editing code. 
+
+###### Please make sure to change the TEMPLATE_DIRS and STATIC_DIRS folders in settings.py (under iim_poc/iim_poc) to point to the directories in your local FS. It is ```path to backend+/iim_poc/{static | templates}```
 
 For each API method, there is a test dictionary that captures a 2 node subgraph that we use to test the API and Front end controls. These dictionaries make sure that when the right data is sent back, the frontend behaves the way we want. 
 
