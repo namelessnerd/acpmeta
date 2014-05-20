@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://infrastructureontology.techlabs.accenture.com#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://infrastructureontology.techlabs.accenture.com">
+  <owl:Ontology rdf:about="">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Created with TopBraid Composer</owl:versionInfo>
+  </owl:Ontology>
+  <owl:Class rdf:ID="A_1">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="A"/>
+          <owl:Restriction>
+            <owl:allValuesFrom>
+              <owl:Class rdf:ID="B_1"/>
+            </owl:allValuesFrom>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="hasB"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#A"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="A_1_1">
+    <rdfs:subClassOf rdf:resource="#A_1"/>
+  </owl:Class>
+  <owl:Class rdf:ID="A_2">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#A"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#A">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="B">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:about="#B_1">
+    <rdfs:subClassOf rdf:resource="#B"/>
+  </owl:Class>
+  <rdf:Property rdf:about="#hasB">
+    <rdfs:range rdf:resource="#B"/>
+    <rdfs:domain rdf:resource="#A"/>
+  </rdf:Property>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

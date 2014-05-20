@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:spin="http://spinrdf.org/spin#"
+    xmlns:sp="http://spinrdf.org/sp#"
+    xmlns="http://ontology.techlabs.acn.com/appModel#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:spl="http://spinrdf.org/spl#"
+  xml:base="http://ontology.techlabs.acn.com/appModel">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://spinrdf.org/spin"/>
+    <owl:imports rdf:resource="http://topbraid.org/spin/spinmapl"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Created with TopBraid Composer</owl:versionInfo>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Operation">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="mod_python">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="GatewayModule"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Apache">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="WebServer"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Module">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:about="#WebServer">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Middleware"/>
+    </rdfs:subClassOf>
+    <spin:rule>
+      <sp:Construct>
+        <sp:where rdf:parseType="Collection">
+          <rdf:Description>
+            <sp:subject rdf:parseType="Resource">
+              <sp:varName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+              >webServer</sp:varName>
+            </sp:subject>
+            <sp:predicate>
+              <rdf:Property rdf:ID="hasModule"/>
+            </sp:predicate>
+            <sp:object rdf:resource="http://spinrdf.org/spin#_this"/>
+          </rdf:Description>
+          <rdf:Description>
+            <sp:subject rdf:resource="http://spinrdf.org/spin#_this"/>
+            <sp:predicate rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"/>
+            <sp:object>
+              <owl:Class rdf:ID="WebServerSecurityModule"/>
+            </sp:object>
+          </rdf:Description>
+        </sp:where>
+        <sp:templates rdf:parseType="Collection">
+          <rdf:Description>
+            <sp:subject rdf:parseType="Resource">
+              <sp:varName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+              >webServer</sp:varName>
+            </sp:subject>
+            <sp:predicate>
+              <rdf:Property rdf:ID="hasWebServerSecurityModule"/>
+            </sp:predicate>
+            <sp:object rdf:resource="http://spinrdf.org/spin#_this"/>
+          </rdf:Description>
+        </sp:templates>
+      </sp:Construct>
+    </spin:rule>
+  </owl:Class>
+  <owl:Class rdf:ID="Database">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Middleware"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="ApplicationServer">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Middleware"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="MSSQLServerEncryptionModule">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="DatabaseSecurityModule"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="WSGI">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GatewayModule"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="TOSCATemplate">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="nginx">
+    <rdfs:subClassOf rdf:resource="#WebServer"/>
+  </owl:Class>
+  <owl:Class rdf:ID="UWSGI">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GatewayModule"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="ComponentArtifact">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Middleware">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Requirement">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="RelationalDBMS">
+    <rdfs:subClassOf rdf:resource="#Database"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Cassandra">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="NoSQL"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Thing_1">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Capability">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Redis">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#NoSQL"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DatabaseConnector">
+    <rdfs:subClassOf rdf:resource="#Module"/>
+  </owl:Class>
+  <owl:Class rdf:ID="NginxSSLModule">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#WebServerSecurityModule"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="IISSecurityModule">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#WebServerSecurityModule"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="MongoDB">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#NoSQL"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="JBoss">
+    <rdfs:subClassOf rdf:resource="#ApplicationServer"/>
+  </owl:Class>
+  <owl:Class rdf:ID="MySQL">
+    <rdfs:subClassOf rdf:resource="#RelationalDBMS"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SecurityModule">
+    <rdfs:subClassOf rdf:resource="#Module"/>
+  </owl:Class>
+  <owl:Class rdf:ID="MSSQLServer">
+    <rdfs:subClassOf rdf:resource="#RelationalDBMS"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Django">
+    <rdfs:subClassOf rdf:resource="#ApplicationServer"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Application">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Archive">
+    <rdfs:subClassOf rdf:resource="#ComponentArtifact"/>
+  </owl:Class>
+  <owl:Class rdf:ID="InternetInformationServices">
+    <rdfs:subClassOf rdf:resource="#WebServer"/>
+  </owl:Class>
+  <owl:Class rdf:about="#DatabaseSecurityModule">
+    <rdfs:subClassOf rdf:resource="#SecurityModule"/>
+  </owl:Class>
+  <owl:Class rdf:about="#GatewayModule">
+    <rdfs:subClassOf rdf:resource="#Module"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Tomcat">
+    <rdfs:subClassOf rdf:resource="#ApplicationServer"/>
+  </owl:Class>
+  <owl:Class rdf:about="#NoSQL">
+    <rdfs:subClassOf rdf:resource="#Database"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Script">
+    <rdfs:subClassOf rdf:resource="#ComponentArtifact"/>
+  </owl:Class>
+  <owl:Class rdf:about="#WebServerSecurityModule">
+    <rdfs:subClassOf rdf:resource="#SecurityModule"/>
+  </owl:Class>
+  <owl:Class rdf:ID="IISAppServer">
+    <rdfs:subClassOf rdf:resource="#ApplicationServer"/>
+  </owl:Class>
+  <owl:Class rdf:ID="OracleRDBMS">
+    <rdfs:subClassOf rdf:resource="#RelationalDBMS"/>
+  </owl:Class>
+  <rdf:Property rdf:ID="hasTemplateApplication">
+    <rdfs:domain rdf:resource="#TOSCATemplate"/>
+    <rdfs:range rdf:resource="#Application"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="hasIISWebServerSecurityModule">
+    <rdfs:subPropertyOf>
+      <rdf:Property rdf:about="#hasWebServerSecurityModule"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#InternetInformationServices"/>
+    <rdfs:range rdf:resource="#IISSecurityModule"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="hasDBSecurityModule">
+    <rdfs:subPropertyOf>
+      <rdf:Property rdf:ID="hasSecurityModule"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#Database"/>
+    <rdfs:range rdf:resource="#DatabaseSecurityModule"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="hasAppServerMiddleware">
+    <rdfs:subPropertyOf>
+      <rdf:Property rdf:ID="hasMiddleware"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#Application"/>
+    <rdfs:range rdf:resource="#ApplicationServer"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="hasMSSQLSecurityModule">
+    <rdfs:domain rdf:resource="#MSSQLServer"/>
+    <rdfs:subPropertyOf rdf:resource="#hasDBSecurityModule"/>
+    <rdfs:range rdf:resource="#MSSQLServerEncryptionModule"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#hasWebServerSecurityModule">
+    <rdfs:subPropertyOf>
+      <rdf:Property rdf:about="#hasSecurityModule"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#WebServer"/>
+    <rdfs:range rdf:resource="#WebServerSecurityModule"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#hasSecurityModule">
+    <rdfs:subPropertyOf>
+      <rdf:Property rdf:about="#hasModule"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#Middleware"/>
+    <rdfs:range rdf:resource="#SecurityModule"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#hasModule">
+    <rdfs:domain rdf:resource="#Middleware"/>
+    <rdfs:range rdf:resource="#Module"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="hasWebServerMiddleware">
+    <rdfs:range rdf:resource="#WebServer"/>
+    <rdfs:domain rdf:resource="#Application"/>
+    <rdfs:subPropertyOf>
+      <rdf:Property rdf:about="#hasMiddleware"/>
+    </rdfs:subPropertyOf>
+  </rdf:Property>
+  <rdf:Property rdf:about="#hasMiddleware">
+    <rdfs:domain rdf:resource="#Application"/>
+    <rdfs:range rdf:resource="#Middleware"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="hasDatabaseMiddleware">
+    <rdfs:subPropertyOf rdf:resource="#hasMiddleware"/>
+    <rdfs:domain rdf:resource="#Application"/>
+    <rdfs:range rdf:resource="#Database"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="is_executed_by">
+    <rdfs:range rdf:resource="#Script"/>
+    <rdfs:domain rdf:resource="#Operation"/>
+  </rdf:Property>
+  <Database rdf:ID="ConnectedCarDatabase"/>
+  <TOSCATemplate rdf:ID="ConnectedCarTemplate">
+    <hasTemplateApplication>
+      <Application rdf:ID="ConnectedCarApplication"/>
+    </hasTemplateApplication>
+  </TOSCATemplate>
+  <Application rdf:ID="SecureACME">
+    <hasWebServerMiddleware>
+      <WebServer rdf:ID="IIS">
+        <hasModule>
+          <WebServerSecurityModule rdf:ID="IISSSLSecurityModule"/>
+        </hasModule>
+        <hasWebServerSecurityModule rdf:resource="#IISSSLSecurityModule"/>
+      </WebServer>
+    </hasWebServerMiddleware>
+  </Application>
+  <WebServer rdf:ID="Nginx"/>
+  <Application rdf:ID="ACMEBankTestApplication">
+    <hasDatabaseMiddleware>
+      <Database rdf:ID="ACMEBankDatabase">
+        <hasDBSecurityModule>
+          <DatabaseSecurityModule rdf:ID="MSSQLEncryptionModule"/>
+        </hasDBSecurityModule>
+        <hasDBSecurityModule>
+          <DatabaseSecurityModule rdf:ID="LDAPAuthenticationModule"/>
+        </hasDBSecurityModule>
+      </Database>
+    </hasDatabaseMiddleware>
+    <hasWebServerMiddleware>
+      <WebServer rdf:ID="ACMEBankIIS"/>
+    </hasWebServerMiddleware>
+  </Application>
+  <DatabaseSecurityModule rdf:ID="OracleEncryptionModule"/>
+  <Application rdf:ID="UnsecureACMEApp">
+    <hasWebServerMiddleware>
+      <WebServer rdf:ID="ACMEWebServer"/>
+    </hasWebServerMiddleware>
+    <hasDatabaseMiddleware>
+      <MSSQLServer rdf:ID="ACMEBankCustomerRecords"/>
+    </hasDatabaseMiddleware>
+  </Application>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

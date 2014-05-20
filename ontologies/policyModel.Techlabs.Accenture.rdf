@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns="http://policyModel.Techlabs.Accenture.com#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:infraModel="http://ontology.techlabs.acn.com/infraModel#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://policyModel.Techlabs.Accenture.com">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://ontology.techlabs.acn.com/infraModel"/>
+    <owl:imports rdf:resource="http://ontology.techlabs.acn.com/appModel"/>
+    <owl:imports rdf:resource="http://cloudProviderModel.Techlabs.Accenture.com"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Created with TopBraid Composer</owl:versionInfo>
+  </owl:Ontology>
+  <rdfs:Class rdf:ID="ConditionType"/>
+  <rdfs:Class rdf:ID="ConditionOperator"/>
+  <rdfs:Class rdf:ID="ConditionValueEntity"/>
+  <rdfs:Class rdf:ID="Rule"/>
+  <rdfs:Class rdf:ID="ConditionValue"/>
+  <rdfs:Class rdf:ID="ConditionEntity"/>
+  <rdfs:Class rdf:ID="EncryptionPolicy">
+    <rdfs:subClassOf rdf:resource="#Rule"/>
+  </rdfs:Class>
+  <owl:Class rdf:ID="EncryptionRuleEntity">
+    <owl:equivalentClass rdf:resource="http://ontology.techlabs.acn.com/appModel#WebServer"/>
+    <rdfs:subClassOf rdf:resource="#ConditionEntity"/>
+  </owl:Class>
+  <owl:Class rdf:ID="EncryptionRuleValueEntity">
+    <owl:equivalentClass rdf:resource="http://ontology.techlabs.acn.com/appModel#Encryption"/>
+    <rdfs:subClassOf rdf:resource="#ConditionValueEntity"/>
+  </owl:Class>
+  <owl:Class rdf:ID="EncryptionRuleValue">
+    <owl:equivalentClass rdf:resource="http://ontology.techlabs.acn.com/appModel#SSL"/>
+    <rdfs:subClassOf rdf:resource="#ConditionValue"/>
+  </owl:Class>
+  <rdf:Property rdf:ID="hasEncryptionForWebServer">
+    <rdfs:domain rdf:resource="#EncryptionRuleEntity"/>
+    <rdfs:range rdf:resource="#EncryptionRuleValue"/>
+  </rdf:Property>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->
