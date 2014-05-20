@@ -1,0 +1,265 @@
+:/body, html {
+	height: 100%;
+	width: 100%;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Lato', 'sans-serif';
+	font-weight: 400;
+	background: url('http://correlor.com/images/page_two_bg.png') repeat;
+	height: 100%;
+}
+
+#wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -60px;
+}
+
+
+.lead {
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.background-blue{
+	background-color: #3288bd;
+}
+
+.background-light-blue{
+	background-color: rgb(94,169,178);
+}
+
+.background-teal{
+	background-color: #abdda4;
+}
+
+.background-green{
+	background-color: #66c2a5;
+}
+
+.background-cream{
+	background-color: #fee08b;
+}
+
+.background-red{
+	background-color: #d53e4f;
+}
+
+.background-orange{
+	background-color: #f46d43;
+}
+
+.background-light-orange{
+	background-color: #fdae61;
+}
+
+.background-light-orange{
+	background-color: #fdae61;
+}
+
+.background-light-green{
+	background-color: #abdda4;
+}
+
+
+.intro-header {
+	padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+	padding-bottom: 50px;
+	color: #f8f8f8;
+	background: url(../img/notes-bg.png) no-repeat center center;
+	background-size: 61%;
+	text-align: center;
+}
+
+.intro-message {
+	position: relative;
+	padding-top: 20%;
+	padding-bottom: 20%;
+}
+
+.intro-message > h1 {
+	margin: 0;
+	font-size: 5em;
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.intro-divider {
+	width: 400px;
+	border-top: 1px solid #f8f8f8;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.intro-message > h3 {
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 767px) {
+	.intro-message {
+		padding-bottom: 15%;
+	}
+
+	.intro-message > h1 {
+		font-size: 3em;
+	}
+
+	ul.intro-social-buttons > li {
+		display: block;
+		margin-bottom: 20px;
+		padding: 0;
+	}
+
+	ul.intro-social-buttons > li:last-child {
+		margin-bottom: 0;
+	}
+
+	.intro-divider {
+		width: 100%;
+	}
+}
+
+.network-name {
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: 2px;
+}
+
+.content-section-a {
+	background-color: #f8f8f8;
+	padding: 50px 0;
+}
+
+.content-section-b {
+	border-top: 1px solid #e7e7e7;
+	border-bottom: 1px solid #e7e7e7;
+	padding: 50px 0;
+}
+
+.section-heading {
+	margin-bottom: 30px;
+}
+
+.section-heading-spacer {
+	border-top: 3px solid #e7e7e7;
+	width: 200px;
+	float: left;
+}
+
+.banner {
+	padding: 100px 0;
+	color: #f8f8f8;
+	background: url(../img/banner-bg.jpg) no-repeat center center;
+	background-size: cover;
+}
+
+.banner h2 {
+	margin: 0;
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+	font-size: 3em;
+}
+
+.banner ul {
+	margin-bottom: 0;
+}
+
+.banner-social-buttons {
+	float: right;
+	margin-top: 0;
+}
+
+@media (max-width: 1199px) {
+	ul.banner-social-buttons {
+		float: left;
+		margin-top: 15px;
+	}	
+}
+
+@media (max-width: 767px) {
+	.banner h2 {
+		margin: 0;
+		text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+		font-size: 3em;
+	}
+
+	ul.banner-social-buttons > li {
+		display: block;
+		margin-bottom: 20px;
+		padding: 0;
+	}
+
+	ul.banner-social-buttons > li:last-child {
+		margin-bottom: 0;
+	}	
+}
+
+footer {
+	background: url('http://correlor.com/images/header_bg.png') repeat;
+	padding: 20px 0;
+  
+}
+
+p.copyright {
+	margin: 15px 0 0;
+}
+
+/* Overriding links */
+.navbar-default .navbar-nav > li > a {
+color: #000;
+}
+
+.navbar-default .navbar-nav > li > a:hover{
+color: #DDD;
+text-decoration: underline;
+}
+
+.navbar-default .navbar-brand {
+color: #00000A;
+}
+
+.domain-icons{
+	border: 2px white solid; 
+	border-radius: 5px;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.domain-icons:hover{
+	background: rgb(0,0,0);
+}
+
+/* definitions for the circle and radial effect
+/* Create the animation blocks */
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* Spinning, gradient circle; CSS only! */
+.circle {
+			border-radius: 50%;
+			display: inline-block;
+			background-color: rgba(50,50,50,0.8);
+			margin-right: 20px;
+			width:2em;
+			height:2em;
+		}
+
+		
+		#advanced {
+			width: 2em;
+			height: 2em;
+			padding-top: 0.8em;
+			font-size: 1.3em;
+			text-align: center;
+			background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
+			background-image: -webkit-radial-gradient(45px 45px, circle cover, #AAA, #CCC);
+			background-image: radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
+		}
+
+
+/* h styles */
+h1, h2, h3, h4, h5{
+	background: inherit;
+}

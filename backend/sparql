@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="x"/>
+  </head>
+  <results>
+    <result>
+      <binding name="x">
+        <uri>http://ontology.techlabs.acn.com/appModel#ACMEBankDatabase</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="x">
+        <uri>http://ontology.techlabs.acn.com/appModel#ACMEBankIIS</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="x">
+        <uri>http://ontology.techlabs.acn.com/appModel#ConnectedCarDatabase</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="x">
+        <uri>http://ontology.techlabs.acn.com/appModel#IIS</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="x">
+        <uri>http://ontology.techlabs.acn.com/appModel#Nginx</uri>
+      </binding>
+    </result>
+  </results>
+</sparql>
