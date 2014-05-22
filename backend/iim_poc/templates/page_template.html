@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+
+    {% include "./head.html" with title=page_title %}
+
+
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        {% include "./topnav.html" %}
+        {%include page_content  %}
+    </div>
+    {% include 'footer.html' %}
+</body>
+
+</html>

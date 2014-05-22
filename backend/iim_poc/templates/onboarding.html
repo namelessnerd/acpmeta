@@ -1,0 +1,81 @@
+
+    <div class="intro-header" class= "navbar-fixed-top" style="background:none; min-height: 750px;">
+        <div class="container wizard-container" style="padding: 10px; margin-top: 50px;">
+            <div  class="navbar-fixed-top" style="background: rgba(94,169,178,0.2); min-height: 12em; border-radius: 5px; border: 1px rgb(94,169,178) solid; padding: 1em; margin-top: 5em;">
+                <div class="row-container" style="margin-top: -1.4em; margin-bottom: 1em;">
+                    <h4 style="text-decoration: underline"> Application Info and Policy Compliance </h4>
+                </div>
+                <div class="row-container" style="">
+                    <div class="col-lg-5" style="margin-left: 1.5em; margin-right: 2.5em;">
+                        {% include 'app-info.html'%}
+                    </div>
+                    <div class="col-lg-5">
+                        {% include 'policy-checklist.html' %}
+                    </div>
+                    <!-- <div class="col-lg-3" style="border: 0.1em solid white;">
+                        <h3> Placeholder for Pending tasks </h3>
+                    </div> -->
+                </div>    
+            </div>
+
+            <div class="row" style="margin-top: 8em;">
+                <div class="col-lg-4">
+                    {% include 'domain-selection.html' %}
+                </div>
+                <div class="col-lg-4">
+                    {% include 'app-type-row.html' %}
+                </div>
+                <div class="col-lg-4">
+                    {% include 'app-creation-row.html' %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                        {% include 'select-component-types.html' %}
+                </div>
+                <div class="col-lg-6">
+                        {% include 'select-components.html' %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                        {% include 'component-policy.html' %}
+                </div>
+                <div class="col-lg-6">
+                        {% include 'component-type-policy.html' %}
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    
+
+    
+
+    <!-- JavaScript -->
+    <script src="/static/js/jslibs/jquery-2.1.0.min.js"></script>
+    <script src="/static/js/jslibs/bootstrap.js"></script>
+    <link href="/static/css/select2.css" rel="stylesheet"/>
+    <script src="/static/js/jslibs/select2.js"></script>
+    <!-- application js files -->
+    <script src="/static/js/middleware-handler.js"></script>
+    <script src="/static/js/onboarding.js"></script>
+    <script src="/static/js/domain-handler.js"></script>
+    <!-- page javascript functions -->
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: "/get/domains",
+                dataType: 'json'
+            })
+            .done(function(data){
+                for (var record in data) {
+                    $('#domainList').append('<option value="'+data[record]['name']+'">'+data[record]['uri']+"</option>") ;
+                }
+            });
+            
+        });
+    </script>
+
