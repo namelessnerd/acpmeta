@@ -1,0 +1,895 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:infra="http://infrastructure.techlabs.accenture.com#"
+    xmlns:spin="http://spinrdf.org/spin#"
+    xmlns:sp="http://spinrdf.org/sp#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:spl="http://spinrdf.org/spl#"
+  xml:base="http://infrastructure.techlabs.accenture.com">
+  <owl:Ontology rdf:about="">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Created with TopBraid Composer</owl:versionInfo>
+    <owl:imports rdf:resource="http://spinrdf.org/spin"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="WebApp">
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="WebAppContainerRequirement"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <rdf:Property rdf:ID="requires"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ApplicationModule"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="VMTemplate">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="TOSCANode"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="OSContainerRequirement">
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="OSContainerCapability"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <rdf:Property rdf:ID="depends_on"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ContainerRequirement"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="PackageArtifact">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="TOSCAArtifact"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Ksh">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ScriptType"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Image">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCANode"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#requires"/>
+            </owl:onProperty>
+            <owl:allValuesFrom rdf:resource="#OSContainerRequirement"/>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="has_deployment_artifact"/>
+            </owl:onProperty>
+            <owl:allValuesFrom>
+              <owl:Class rdf:ID="ImageArtifact"/>
+            </owl:allValuesFrom>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="has_operation"/>
+            </owl:onProperty>
+            <owl:allValuesFrom>
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:ID="Create"/>
+                  <owl:Class rdf:ID="Clone"/>
+                </owl:unionOf>
+              </owl:Class>
+            </owl:allValuesFrom>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="JavaFeatureCapability">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="FeatureCapability"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="AppServer">
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="WebAppContainerCapability"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <rdf:Property rdf:ID="provides"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Middleware"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="CentOS">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Fedora"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="JDBCFeatureCapability">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#FeatureCapability"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="LinuxMiddlewareContainerCapability">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="MiddlewareContainerCapability"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="PowerOff">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="TOSCAOperation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Create">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCAOperation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="ACP">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ComputeEngine"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Reboot">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCAOperation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="JDBCModule">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Module"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#provides"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#JDBCFeatureCapability"/>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="ChefArtifact">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCAArtifact"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="EC2">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ComputeEngine"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Linux">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="OS"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#provides"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#LinuxMiddlewareContainerCapability"/>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="DatabaseContainerCapability">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ContainerCapability"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DatabaseEndpointRequirement">
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="DatabaseEndpointCapability"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#depends_on"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="EndpointRequirement"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#FeatureCapability">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Capability"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="JBoss">
+    <rdfs:subClassOf rdf:resource="#AppServer"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Apache">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="WebServer"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="ScriptArtifact">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCAArtifact"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Tar">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ArchiveType"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="FeatureRequirement">
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#FeatureCapability"/>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#depends_on"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Requirement"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="MacOS">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#OS"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="EndpointCapability">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Capability"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="RHEL">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Fedora"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="MMSAppProperty">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="TOSCAProperty"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#MiddlewareContainerCapability">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ContainerCapability"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#ScriptType">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="MiddlewareProperty">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="TemplateProperty"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Host">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCANode"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="has_property"/>
+            </owl:onProperty>
+            <owl:allValuesFrom>
+              <owl:Class rdf:ID="VMProperty"/>
+            </owl:allValuesFrom>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#provides"/>
+            </owl:onProperty>
+            <owl:allValuesFrom>
+              <owl:Class rdf:about="#OSContainerCapability"/>
+            </owl:allValuesFrom>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#has_operation"/>
+            </owl:onProperty>
+            <owl:allValuesFrom>
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:ID="PowerOn"/>
+                  <owl:Class rdf:about="#PowerOff"/>
+                </owl:unionOf>
+              </owl:Class>
+            </owl:allValuesFrom>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#Requirement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="TOSCARelationship"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Zip">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ArchiveType"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Connection">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCANode"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#EndpointRequirement">
+    <rdfs:subClassOf rdf:resource="#Requirement"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DatabaseContainerRequirement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ContainerRequirement"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#depends_on"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DatabaseContainerCapability"/>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Sh">
+    <rdfs:subClassOf rdf:resource="#ScriptType"/>
+  </owl:Class>
+  <owl:Class rdf:ID="MySQL">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="DBServer"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Start">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCAOperation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="MMSTemplate">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ApplicationContainerCapability">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ContainerCapability"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Disk">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#VMProperty"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#TOSCAArtifact">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:about="#DatabaseEndpointCapability">
+    <rdfs:subClassOf rdf:resource="#EndpointCapability"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Ubuntu">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Debian"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Clone">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCAOperation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#ImageArtifact">
+    <rdfs:subClassOf rdf:resource="#TOSCAArtifact"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Restart">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCAOperation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="LanguageFramework">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCANode"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#VMProperty">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TemplateProperty"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Python">
+    <rdfs:subClassOf rdf:resource="#ScriptType"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ApplicationContainerRequirement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ContainerRequirement"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#depends_on"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#ApplicationContainerCapability"/>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="IIS">
+    <rdfs:subClassOf rdf:resource="#AppServer"/>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#requires"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="WindowsMiddlewareContainerRequirement"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#Middleware">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCANode"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#has_operation"/>
+            </owl:onProperty>
+            <owl:allValuesFrom>
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#Start"/>
+                  <owl:Class rdf:ID="Stop"/>
+                  <owl:Class rdf:about="#Restart"/>
+                </owl:unionOf>
+              </owl:Class>
+            </owl:allValuesFrom>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#requires"/>
+            </owl:onProperty>
+            <owl:allValuesFrom>
+              <owl:Class rdf:ID="MiddlewareContainerRequirement"/>
+            </owl:allValuesFrom>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#TOSCARelationship">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Debian">
+    <rdfs:subClassOf rdf:resource="#Linux"/>
+  </owl:Class>
+  <owl:Class rdf:about="#DBServer">
+    <rdfs:subClassOf rdf:resource="#Middleware"/>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#provides"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DatabaseContainerCapability"/>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="ArchiveArtifact">
+    <rdfs:subClassOf rdf:resource="#TOSCAArtifact"/>
+  </owl:Class>
+  <owl:Class rdf:about="#WebServer">
+    <rdfs:subClassOf rdf:resource="#Middleware"/>
+  </owl:Class>
+  <owl:Class rdf:ID="IP_Address">
+    <rdfs:subClassOf rdf:resource="#VMProperty"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Oracle">
+    <rdfs:subClassOf rdf:resource="#DBServer"/>
+  </owl:Class>
+  <owl:Class rdf:about="#PowerOn">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCAOperation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Java">
+    <rdfs:subClassOf rdf:resource="#LanguageFramework"/>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#provides"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#JavaFeatureCapability"/>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="MySQLDatabase">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Database"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#TOSCANode">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="JavaFeatureRequirement">
+    <rdfs:subClassOf rdf:resource="#FeatureRequirement"/>
+  </owl:Class>
+  <owl:Class rdf:about="#WebAppContainerCapability">
+    <rdfs:subClassOf rdf:resource="#ApplicationContainerCapability"/>
+  </owl:Class>
+  <owl:Class rdf:ID="JDBCFeatureRequirement">
+    <rdfs:subClassOf rdf:resource="#FeatureRequirement"/>
+  </owl:Class>
+  <owl:Class rdf:ID="TPS">
+    <rdfs:subClassOf rdf:resource="#MMSAppProperty"/>
+  </owl:Class>
+  <owl:Class rdf:ID="vCPU">
+    <rdfs:subClassOf rdf:resource="#VMProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ContainerCapability">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Capability"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Stop">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCAOperation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Tier">
+    <rdfs:subClassOf rdf:resource="#TOSCANode"/>
+  </owl:Class>
+  <owl:Class rdf:about="#TOSCAProperty">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Azure">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ComputeEngine"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Fedora">
+    <rdfs:subClassOf rdf:resource="#Linux"/>
+  </owl:Class>
+  <owl:Class rdf:about="#OSContainerCapability">
+    <rdfs:subClassOf rdf:resource="#ContainerCapability"/>
+  </owl:Class>
+  <owl:Class rdf:ID="War">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ArchiveType"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#OS">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:allValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#MiddlewareContainerCapability"/>
+                  <owl:Class rdf:about="#ApplicationContainerCapability"/>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:allValuesFrom>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#provides"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#OSContainerRequirement"/>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#requires"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="#TOSCANode"/>
+  </owl:Class>
+  <owl:Class rdf:about="#WebAppContainerRequirement">
+    <rdfs:subClassOf rdf:resource="#ApplicationContainerRequirement"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Install">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TOSCAOperation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Database">
+    <rdfs:subClassOf rdf:resource="#TOSCANode"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Capability">
+    <rdfs:subClassOf rdf:resource="#TOSCARelationship"/>
+  </owl:Class>
+  <owl:Class rdf:ID="RAM">
+    <rdfs:subClassOf rdf:resource="#VMProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ApplicationModule">
+    <rdfs:subClassOf rdf:resource="#TOSCANode"/>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#requires"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#ApplicationContainerRequirement"/>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#TemplateProperty">
+    <rdfs:subClassOf rdf:resource="#TOSCAProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ContainerRequirement">
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#ContainerCapability"/>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#depends_on"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="#Requirement"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Module">
+    <rdfs:subClassOf rdf:resource="#ApplicationModule"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Windows">
+    <rdfs:subClassOf rdf:resource="#OS"/>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#provides"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="WindowsMiddlewareContainerCapability"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#WindowsMiddlewareContainerCapability">
+    <rdfs:subClassOf rdf:resource="#MiddlewareContainerCapability"/>
+  </owl:Class>
+  <owl:Class rdf:about="#TOSCAOperation">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="LoadBalancing">
+    <rdfs:subClassOf rdf:resource="#MMSAppProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ArchiveType">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="LinuxMiddlewareContainerRequirement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#MiddlewareContainerRequirement"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#depends_on"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#LinuxMiddlewareContainerCapability"/>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#MiddlewareContainerRequirement">
+    <rdfs:subClassOf rdf:resource="#ContainerRequirement"/>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#depends_on"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#MiddlewareContainerCapability"/>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#WindowsMiddlewareContainerRequirement">
+    <rdfs:subClassOf rdf:resource="#MiddlewareContainerRequirement"/>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <rdf:Property rdf:about="#depends_on"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#WindowsMiddlewareContainerCapability"/>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#ComputeEngine">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <rdf:Property rdf:ID="has_connection">
+    <rdfs:range rdf:resource="#Connection"/>
+    <rdfs:domain rdf:resource="#WebApp"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_dbpassword">
+    <rdfs:domain rdf:resource="#Database"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="provides_dbpassword">
+    <rdfs:domain rdf:resource="#Connection"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#requires">
+    <rdfs:domain rdf:resource="#TOSCANode"/>
+    <rdfs:range rdf:resource="#Requirement"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_archive_type">
+    <rdfs:range rdf:resource="#ArchiveType"/>
+    <rdfs:domain rdf:resource="#ArchiveArtifact"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_artifact_path">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#TOSCAArtifact"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#depends_on">
+    <rdfs:range rdf:resource="#Capability"/>
+    <rdfs:domain rdf:resource="#Requirement"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#provides">
+    <rdfs:domain rdf:resource="#TOSCANode"/>
+    <rdfs:range rdf:resource="#Capability"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="connectsto_db">
+    <rdfs:range rdf:resource="#Database"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_dbname">
+    <rdfs:domain rdf:resource="#Database"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="provides_dbuser">
+    <rdfs:domain rdf:resource="#Connection"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="is_deployed_with">
+    <rdfs:domain rdf:resource="#WebApp"/>
+    <rdfs:range rdf:resource="#WebApp"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_dbuser">
+    <rdfs:domain rdf:resource="#Database"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="maps_to_script">
+    <rdfs:range rdf:resource="#ScriptArtifact"/>
+    <rdfs:domain rdf:resource="#TOSCAOperation"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_version">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#TOSCANode"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_value">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#TOSCAProperty"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_artifact_name">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#TOSCAArtifact"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.w3.org/2002/07/owl#has_name"/>
+  <rdf:Property rdf:about="#has_property">
+    <rdfs:range rdf:resource="#TOSCAProperty"/>
+    <rdfs:domain rdf:resource="#TOSCANode"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="is_available">
+    <rdfs:domain rdf:resource="#Host"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#has_operation">
+    <rdfs:range rdf:resource="#TOSCAOperation"/>
+    <rdfs:domain rdf:resource="#TOSCANode"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_script_type">
+    <rdfs:range rdf:resource="#ScriptType"/>
+    <rdfs:domain rdf:resource="#ScriptArtifact"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#has_deployment_artifact">
+    <rdfs:range rdf:resource="#TOSCAArtifact"/>
+    <rdfs:domain rdf:resource="#TOSCANode"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_key">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#TOSCAProperty"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="provides_dbname">
+    <rdfs:domain rdf:resource="#Connection"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_targeted_path">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#TOSCAArtifact"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_name">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#TOSCANode"/>
+  </rdf:Property>
+  <infra:Java rdf:ID="Java_1"/>
+  <infra:MySQL rdf:ID="MySQL_1"/>
+  <infra:DatabaseEndpointCapability rdf:ID="DatabaseEndpointCapability_1"/>
+  <infra:RHEL rdf:ID="RHEL_6.4">
+    <infra:has_deployment_artifact>
+      <infra:ImageArtifact rdf:ID="RHEL6.4"/>
+    </infra:has_deployment_artifact>
+    <infra:provides>
+      <infra:LinuxMiddlewareContainerCapability rdf:ID="LinuxMiddlewareContainerCapability_1"/>
+    </infra:provides>
+    <infra:requires>
+      <infra:OSContainerRequirement rdf:ID="OSContainerRequirement_1">
+        <infra:depends_on>
+          <infra:OSContainerCapability rdf:ID="OSContainerCapability_1"/>
+        </infra:depends_on>
+      </infra:OSContainerRequirement>
+    </infra:requires>
+  </infra:RHEL>
+  <infra:Host rdf:ID="AppServerHost_1">
+    <infra:has_property>
+      <infra:Disk rdf:ID="Disk_1">
+        <infra:has_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >30GB</infra:has_value>
+      </infra:Disk>
+    </infra:has_property>
+    <infra:has_property>
+      <infra:RAM rdf:ID="RAM_1">
+        <infra:has_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >4</infra:has_value>
+      </infra:RAM>
+    </infra:has_property>
+    <infra:has_property>
+      <infra:vCPU rdf:ID="vCPU_1">
+        <infra:has_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2</infra:has_value>
+      </infra:vCPU>
+    </infra:has_property>
+    <infra:has_property>
+      <infra:IP_Address rdf:ID="IP_Address_1"/>
+    </infra:has_property>
+    <infra:is_available rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</infra:is_available>
+    <infra:provides rdf:resource="#OSContainerCapability_1"/>
+    <infra:provides>
+      <infra:ApplicationContainerCapability rdf:ID="ApplicationContainerCapability_1"/>
+    </infra:provides>
+  </infra:Host>
+  <infra:Image rdf:ID="MMS_AS_Image">
+    <infra:provides rdf:resource="#ApplicationContainerCapability_1"/>
+    <infra:requires rdf:resource="#OSContainerRequirement_1"/>
+  </infra:Image>
+  <infra:LinuxMiddlewareContainerRequirement rdf:ID="LinuxMiddlewareContainerRequirement_1">
+    <infra:depends_on rdf:resource="#LinuxMiddlewareContainerCapability_1"/>
+  </infra:LinuxMiddlewareContainerRequirement>
+  <infra:WindowsMiddlewareContainerRequirement rdf:ID="WindowsMiddlewareContainerRequirement_1">
+    <infra:depends_on>
+      <infra:WindowsMiddlewareContainerCapability rdf:ID="WindowsMiddlewareContainerCapability_1"/>
+    </infra:depends_on>
+  </infra:WindowsMiddlewareContainerRequirement>
+  <infra:ChefArtifact rdf:ID="MySQLCookbook"/>
+  <infra:WebApp rdf:ID="MMService">
+    <infra:requires>
+      <infra:ApplicationContainerRequirement rdf:ID="ApplicationContainerRequirement_1">
+        <infra:depends_on rdf:resource="#ApplicationContainerCapability"/>
+      </infra:ApplicationContainerRequirement>
+    </infra:requires>
+    <infra:has_deployment_artifact>
+      <infra:ArchiveArtifact rdf:ID="MMSArchive_1">
+        <infra:has_archive_type rdf:resource="#Zip"/>
+      </infra:ArchiveArtifact>
+    </infra:has_deployment_artifact>
+    <infra:has_operation>
+      <infra:Install rdf:ID="Install_1"/>
+    </infra:has_operation>
+  </infra:WebApp>
+  <infra:DatabaseContainerRequirement rdf:ID="DatabaseContainerRequirement_1">
+    <infra:depends_on>
+      <infra:DatabaseContainerCapability rdf:ID="DatabaseContainerCapability_1"/>
+    </infra:depends_on>
+  </infra:DatabaseContainerRequirement>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->
